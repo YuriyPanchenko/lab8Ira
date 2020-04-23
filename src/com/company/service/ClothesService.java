@@ -37,20 +37,29 @@ public class ClothesService {
     }
 
     public static ArrayList<Clothes> deleteClothesById(int id, ArrayList<Clothes> clothes){
-        clothes.removeIf(clothes1 -> clothes1.getId() == id);
-        clothes.forEach(clothes1 -> {if(clothes1.getId() > id) clothes1.setId(clothes1.getId() - 1);});
+        try{
+            clothes.removeIf(clothes1 -> clothes1.getId() == id);
+            clothes.forEach(clothes1 -> {if(clothes1.getId() > id) clothes1.setId(clothes1.getId() - 1);});
+        }catch (ArrayIndexOutOfBoundsException e){
+
+        }
         return clothes;
     }
 
     public static ArrayList<Clothes> changeClothesById(int id, Clothes clothes, ArrayList<Clothes> clothesArrayList){
-        clothesArrayList.forEach(clothes1 -> {if(clothes1.getId() == id) {
-            clothes1.setColor(clothes.getColor());
-            clothes1.setCompany(clothes.getCompany());
-            clothes1.setName(clothes.getName());
-            clothes1.setMaterial(clothes.getMaterial());
-            clothes1.setPrice(clothes.getPrice());
-            clothes1.setSize(clothes.getSize());
-        }} );
+        try {
+            clothesArrayList.forEach(clothes1 -> {if(clothes1.getId() == id) {
+                clothes1.setColor(clothes.getColor());
+                clothes1.setCompany(clothes.getCompany());
+                clothes1.setName(clothes.getName());
+                clothes1.setMaterial(clothes.getMaterial());
+                clothes1.setPrice(clothes.getPrice());
+                clothes1.setSize(clothes.getSize());
+            }} );
+        }catch (ArrayIndexOutOfBoundsException e){
+
+        }
+
         return clothesArrayList;
     }
 
